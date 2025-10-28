@@ -2,14 +2,7 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Bot, Clock, BarChart2, Settings } from "lucide-react";
-
-export type Chatbot = {
-  id: string;
-  name: string;
-  status: "online" | "offline" | "training";
-  lastActivity: string;
-  usage: number;
-};
+import type { Chatbot } from "@/types";
 
 interface ChatbotCardProps {
   chatbot: Chatbot;

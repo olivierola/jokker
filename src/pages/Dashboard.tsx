@@ -1,5 +1,6 @@
-import { ChatbotCard, type Chatbot } from "@/components/ChatbotCard";
+import { ChatbotCard } from "@/components/ChatbotCard";
 import { AddChatbotCard } from "@/components/AddChatbotCard";
+import type { Chatbot } from "@/types";
 
 const mockChatbots: Chatbot[] = [
   {
@@ -27,27 +28,17 @@ const mockChatbots: Chatbot[] = [
 
 const Dashboard = () => {
   return (
-    <div className="bg-gray-50 dark:bg-background flex-grow">
-      <div className="container mx-auto p-4 sm:p-6 lg:p-8">
-        <header className="mb-8">
-          <h1 className="text-3xl font-bold tracking-tight text-foreground">
-            Dashboard
-          </h1>
-          <p className="mt-1 text-sm text-muted-foreground">
-            Manage your RAG agents and create new ones.
-          </p>
-        </header>
-
-        <main>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-            {mockChatbots.map((chatbot) => (
-              <ChatbotCard key={chatbot.id} chatbot={chatbot} />
-            ))}
-            <AddChatbotCard />
-          </div>
-        </main>
+    <>
+      <div className="flex items-center">
+        <h1 className="text-lg font-semibold md:text-2xl">Dashboard</h1>
       </div>
-    </div>
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+        {mockChatbots.map((chatbot) => (
+          <ChatbotCard key={chatbot.id} chatbot={chatbot} />
+        ))}
+        <AddChatbotCard />
+      </div>
+    </>
   );
 };
 

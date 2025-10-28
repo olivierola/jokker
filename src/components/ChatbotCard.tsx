@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Bot, Clock, BarChart2, Settings } from "lucide-react";
 import type { Chatbot } from "@/types";
+import { Link } from "react-router-dom";
 
 interface ChatbotCardProps {
   chatbot: Chatbot;
@@ -46,9 +47,11 @@ export const ChatbotCard = ({ chatbot }: ChatbotCardProps) => {
         </div>
       </CardContent>
       <CardFooter>
-        <Button variant="outline" size="sm" className="w-full">
-          <Settings className="mr-2 h-4 w-4" />
-          Manage
+        <Button asChild variant="outline" size="sm" className="w-full">
+          <Link to={`/chatbot/${chatbot.id}`}>
+            <Settings className="mr-2 h-4 w-4" />
+            Manage
+          </Link>
         </Button>
       </CardFooter>
     </Card>

@@ -27,11 +27,11 @@ const mockChatbots: Chatbot[] = [
 
 const Dashboard = () => {
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-background p-4 sm:p-6 lg:p-8">
-      <div className="max-w-7xl mx-auto">
+    <div className="bg-gray-50 dark:bg-background flex-grow">
+      <div className="container mx-auto p-4 sm:p-6 lg:p-8">
         <header className="mb-8">
           <h1 className="text-3xl font-bold tracking-tight text-foreground">
-            Chatbots Dashboard
+            Dashboard
           </h1>
           <p className="mt-1 text-sm text-muted-foreground">
             Manage your RAG agents and create new ones.

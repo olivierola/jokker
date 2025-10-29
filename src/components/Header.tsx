@@ -1,8 +1,9 @@
 import { Menu, Bot, CircleUser, Book } from "lucide-react";
 import { Button } from "./ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "./ui/sheet";
-import { Link, NavLink, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useLocation, useParams } from "react-router-dom";
 import { mainNavItems } from "@/config/main-nav-items";
+import { poolNavItems } from "@/config/pool-nav-items";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -12,41 +13,29 @@ import {
   DropdownMenuTrigger,
 } from "./ui/dropdown-menu";
 import { supabase } from "@/integrations/supabase/client";
-import { cn } from "@/lib/utils";
 
 export const Header = () => {
   const navigate = useNavigate();
+  const location = useLocation();
+  const { poolId } = useParams();
 
   const handleLogout = async () => {
     await supabase.auth.signOut();
     navigate('/login');
   };
 
+  // Logique pour le menu de la feuille mobile
+  const isPoolView = location.pathname.startsWith(`/pool/`);
+  const navItems = isPoolView ? poolNavItems : mainNavItems;
+  const getPath = (item: { href: string }) => {
+    if (isPoolView) {
+      return `/pool/${poolId}${item.href}`;
+    }
+    return item.href;
+  };
+
   return (
     <header className="flex h-14 items-center gap-4 border-b bg-muted/40 px-4 lg:h-[60px] lg:px-6">
-      <div className="flex items-center gap-4">
-        <Link to="/dashboard" className="flex items-center gap-2 font-semibold">
-          <Bot className="h-6 w-6" />
-          <span className="hidden md:inline-block">AI Forge</span>
-        </Link>
-        <nav className="hidden md:flex md:items-center md:gap-5 lg:gap-6 text-sm font-medium">
-          {mainNavItems.map((item) => (
-            <NavLink
-              key={item.href}
-              to={item.href}
-              className={({ isActive }) =>
-                cn(
-                  "transition-colors hover:text-foreground",
-                  isActive ? "text-foreground" : "text-muted-foreground"
-                )
-              }
-            >
-              {item.label}
-            </NavLink>
-          ))}
-        </nav>
-      </div>
-
       <Sheet>
         <SheetTrigger asChild>
           <Button variant="outline" size="icon" className="shrink-0 md:hidden">
@@ -63,10 +52,10 @@ export const Header = () => {
               <Bot className="h-6 w-6" />
               <span className="">AI Forge</span>
             </Link>
-            {mainNavItems.map((item) => (
+            {navItems.map((item) => (
               <Link
                 key={item.href}
-                to={item.href}
+                to={getPath(item)}
                 className="mx-[-0.65rem] flex items-center gap-4 rounded-xl px-3 py-2 text-muted-foreground hover:text-foreground"
               >
                 <item.icon className="h-5 w-5" />

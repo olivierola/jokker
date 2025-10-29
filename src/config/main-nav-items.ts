@@ -1,10 +1,10 @@
-import { LayoutGrid, Settings, CreditCard } from "lucide-react";
+import { FolderKanban, Settings, CreditCard } from "lucide-react";
 
 export const mainNavItems = [
   {
     href: "/dashboard",
-    label: "Dashboard",
-    icon: LayoutGrid,
+    label: "Pools",
+    icon: FolderKanban,
   },
   {
     href: "/billing",

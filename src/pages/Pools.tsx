@@ -1,6 +1,5 @@
 import React from "react";
 import { PoolCard } from "@/components/PoolCard";
-import { AddPoolCard } from "@/components/AddPoolCard";
 import { Skeleton } from "@/components/ui/skeleton";
 import type { Pool } from "@/api/pools";
 import { fetchPools } from "@/api/pools";
@@ -57,7 +56,6 @@ const Pools = () => {
           : pools.map((pool) => (
               <PoolCard key={pool.id} pool={pool} />
             ))}
-        {!isLoading && <AddPoolCard />}
       </div>
     </>
   );

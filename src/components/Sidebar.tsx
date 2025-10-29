@@ -1,23 +1,10 @@
-import { mainNavItems } from "@/config/main-nav-items";
 import { poolNavItems } from "@/config/pool-nav-items";
-import { NavLink, useLocation, useParams } from "react-router-dom";
+import { NavLink, useParams, Link } from "react-router-dom";
 import { cn } from "@/lib/utils";
 import { Bot } from "lucide-react";
-import { Link } from "react-router-dom";
 
 export const Sidebar = () => {
   const { poolId } = useParams();
-  const location = useLocation();
-
-  const isPoolView = location.pathname.startsWith(`/pool/`);
-  const navItems = isPoolView ? poolNavItems : mainNavItems;
-
-  const getPath = (item: { href: string }) => {
-    if (isPoolView) {
-      return `/pool/${poolId}${item.href}`;
-    }
-    return item.href;
-  };
 
   return (
     <div className="hidden border-r bg-muted/40 md:block">
@@ -30,10 +17,10 @@ export const Sidebar = () => {
         </div>
         <div className="flex-1">
           <nav className="grid items-start px-2 text-sm font-medium lg:px-4">
-            {navItems.map((item) => (
+            {poolNavItems.map((item) => (
               <NavLink
                 key={item.label}
-                to={getPath(item)}
+                to={`/pool/${poolId}${item.href}`}
                 end={item.href === "/"}
                 className={({ isActive }) =>
                   cn(

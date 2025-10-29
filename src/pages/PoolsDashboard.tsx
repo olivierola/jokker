@@ -4,6 +4,9 @@ import { AddPoolCard } from "@/components/AddPoolCard";
 import { Skeleton } from "@/components/ui/skeleton";
 import type { Pool } from "@/api/pools";
 import { fetchPools } from "@/api/pools";
+import { Button } from "@/components/ui/button";
+import { Link } from "react-router-dom";
+import { PlusCircle } from "lucide-react";
 
 const PoolsDashboard = () => {
   const [pools, setPools] = React.useState<Pool[]>([]);
@@ -33,6 +36,12 @@ const PoolsDashboard = () => {
             Select a pool to manage its resources or create a new one.
           </p>
         </div>
+        <Button asChild>
+          <Link to="/create-pool">
+            <PlusCircle className="mr-2 h-4 w-4" />
+            Create New Pool
+          </Link>
+        </Button>
       </div>
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
         {isLoading

@@ -4,6 +4,7 @@ import Login from "./pages/Login";
 import Dashboard from "./pages/Dashboard";
 import NotFound from "./pages/NotFound";
 import { Layout } from "./components/Layout";
+import { PoolLayout } from "./components/PoolLayout";
 import CreateChatbot from "./pages/CreateChatbot";
 import ChatbotDetail from "./pages/ChatbotDetail";
 import { Skeleton } from "./components/ui/skeleton";
@@ -46,7 +47,9 @@ const AppRoutes = () => {
         <Route path="/create-pool" element={<CreatePool />} />
         <Route path="/billing" element={<Billing />} />
         <Route path="/settings" element={<Settings />} />
+      </Route>
 
+      <Route element={<PoolLayout />}>
         <Route path="/pool/:poolId/chatbots" element={<Dashboard />} />
         <Route path="/pool/:poolId/create-chatbot" element={<CreateChatbot />} />
         <Route path="/pool/:poolId/chatbot/:id" element={<ChatbotDetail />} />

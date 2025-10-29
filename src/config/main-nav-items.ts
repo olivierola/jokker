@@ -1,8 +1,8 @@
 import { LayoutGrid, Settings, CreditCard } from "lucide-react";
 
-export const navItems = [
+export const mainNavItems = [
   {
-    href: "/",
+    href: "/dashboard",
     label: "Dashboard",
     icon: LayoutGrid,
   },

@@ -8,7 +8,7 @@ import { Step3DataSources } from "@/components/wizard/Step3DataSources";
 import { Step4Vectorization } from "@/components/wizard/Step4Vectorization";
 import { Step5Deploy } from "@/components/wizard/Step5Deploy";
 import { supabase } from "@/integrations/supabase/client";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { showSuccess, showError } from "@/utils/toast";
 import { useState } from "react";
 
@@ -23,6 +23,7 @@ const steps = [
 const CreateChatbot = () => {
   const { step, nextStep, prevStep, name, description, hosting } = useChatbotWizardStore();
   const navigate = useNavigate();
+  const { poolId } = useParams();
   const [isDeploying, setIsDeploying] = useState(false);
   const progress = (step / steps.length) * 100;
 
@@ -36,6 +37,11 @@ const CreateChatbot = () => {
       setIsDeploying(false);
       return;
     }
+    if (!poolId) {
+      showError("Pool ID is missing.");
+      setIsDeploying(false);
+      return;
+    }
 
     const { error } = await supabase
       .from('chatbots')
@@ -44,13 +50,14 @@ const CreateChatbot = () => {
         description,
         hosting,
         user_id: user.id,
+        pool_id: poolId,
       });
 
     if (error) {
       showError(error.message);
     } else {
       showSuccess("Chatbot created successfully!");
-      navigate("/dashboard");
+      navigate(`/pool/${poolId}/chatbots`);
     }
     setIsDeploying(false);
   };

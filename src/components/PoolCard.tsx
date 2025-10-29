@@ -27,7 +27,7 @@ export const PoolCard = ({ pool }: PoolCardProps) => {
       </CardContent>
       <CardFooter>
         <Button asChild variant="outline" size="sm" className="w-full">
-          <Link to={`/pool/${pool.id}`}>
+          <Link to={`/pool/${pool.id}/chatbots`}>
             Open Pool
             <ArrowRight className="ml-2 h-4 w-4" />
           </Link>

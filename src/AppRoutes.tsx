@@ -4,10 +4,12 @@ import Login from "./pages/Login";
 import Dashboard from "./pages/Dashboard";
 import NotFound from "./pages/NotFound";
 import { Layout } from "./components/Layout";
+import { PoolLayout } from "./components/PoolLayout";
 import CreateChatbot from "./pages/CreateChatbot";
 import ChatbotDetail from "./pages/ChatbotDetail";
 import { Skeleton } from "./components/ui/skeleton";
 import PoolsDashboard from "./pages/PoolsDashboard";
+import CreatePool from "./pages/CreatePool";
 
 const AppRoutes = () => {
   const { session, isLoading } = useSession();
@@ -36,17 +38,22 @@ const AppRoutes = () => {
   }
 
   return (
-    <Layout>
-      <Routes>
+    <Routes>
+      <Route element={<Layout />}>
         <Route path="/" element={<Navigate to="/dashboard" replace />} />
         <Route path="/dashboard" element={<PoolsDashboard />} />
+        <Route path="/create-pool" element={<CreatePool />} />
+      </Route>
+
+      <Route element={<PoolLayout />}>
         <Route path="/pool/:poolId/chatbots" element={<Dashboard />} />
-        <Route path="/create" element={<CreateChatbot />} />
-        <Route path="/chatbot/:id" element={<ChatbotDetail />} />
-        <Route path="/login" element={<Navigate to="/dashboard" replace />} />
-        <Route path="*" element={<NotFound />} />
-      </Routes>
-    </Layout>
+        <Route path="/pool/:poolId/create-chatbot" element={<CreateChatbot />} />
+        <Route path="/pool/:poolId/chatbot/:id" element={<ChatbotDetail />} />
+      </Route>
+      
+      <Route path="/login" element={<Navigate to="/dashboard" replace />} />
+      <Route path="*" element={<NotFound />} />
+    </Routes>
   );
 };
 

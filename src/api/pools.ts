@@ -20,3 +20,21 @@ export const fetchPools = async (): Promise<Pool[]> => {
 
   return data;
 };
+
+export const createPool = async (pool: { name: string; description?: string }): Promise<Pool> => {
+    const { data: { user } } = await supabase.auth.getUser();
+    if (!user) throw new Error("User not authenticated");
+
+    const { data, error } = await supabase
+        .from('pools')
+        .insert({ ...pool, user_id: user.id })
+        .select()
+        .single();
+
+    if (error) {
+        console.error("Error creating pool:", error);
+        throw error;
+    }
+
+    return data;
+};

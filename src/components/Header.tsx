@@ -1,4 +1,4 @@
-import { Menu, Bot, CircleUser } from "lucide-react";
+import { Menu, Bot, CircleUser, Book } from "lucide-react";
 import { Button } from "./ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "./ui/sheet";
 import { Link, useNavigate } from "react-router-dom";
@@ -53,9 +53,14 @@ export const Header = () => {
         </SheetContent>
       </Sheet>
 
-      <div className="w-full flex-1">
-        {/* La recherche ou les fils d'Ariane peuvent être ajoutés ici */}
-      </div>
+      <div className="w-full flex-1" />
+
+      <Button variant="outline" size="sm" asChild>
+        <a href="/docs">
+          <Book className="mr-2 h-4 w-4" />
+          Docs
+        </a>
+      </Button>
 
       <DropdownMenu>
         <DropdownMenuTrigger asChild>

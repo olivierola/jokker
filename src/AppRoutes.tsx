@@ -7,6 +7,7 @@ import { Layout } from "./components/Layout";
 import CreateChatbot from "./pages/CreateChatbot";
 import ChatbotDetail from "./pages/ChatbotDetail";
 import { Skeleton } from "./components/ui/skeleton";
+import PoolsDashboard from "./pages/PoolsDashboard";
 
 const AppRoutes = () => {
   const { session, isLoading } = useSession();
@@ -38,7 +39,8 @@ const AppRoutes = () => {
     <Layout>
       <Routes>
         <Route path="/" element={<Navigate to="/dashboard" replace />} />
-        <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/dashboard" element={<PoolsDashboard />} />
+        <Route path="/pool/:poolId/chatbots" element={<Dashboard />} />
         <Route path="/create" element={<CreateChatbot />} />
         <Route path="/chatbot/:id" element={<ChatbotDetail />} />
         <Route path="/login" element={<Navigate to="/dashboard" replace />} />

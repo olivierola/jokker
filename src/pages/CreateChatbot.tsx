@@ -7,6 +7,10 @@ import { Step2Hosting } from "@/components/wizard/Step2Hosting";
 import { Step3DataSources } from "@/components/wizard/Step3DataSources";
 import { Step4Vectorization } from "@/components/wizard/Step4Vectorization";
 import { Step5Deploy } from "@/components/wizard/Step5Deploy";
+import { supabase } from "@/integrations/supabase/client";
+import { useNavigate } from "react-router-dom";
+import { showSuccess, showError } from "@/utils/toast";
+import { useState } from "react";
 
 const steps = [
   { number: 1, component: <Step1Details /> },
@@ -17,10 +21,39 @@ const steps = [
 ];
 
 const CreateChatbot = () => {
-  const { step, nextStep, prevStep } = useChatbotWizardStore();
+  const { step, nextStep, prevStep, name, description, hosting } = useChatbotWizardStore();
+  const navigate = useNavigate();
+  const [isDeploying, setIsDeploying] = useState(false);
   const progress = (step / steps.length) * 100;
 
   const CurrentStepComponent = steps[step - 1].component;
+
+  const handleDeploy = async () => {
+    setIsDeploying(true);
+    const { data: { user } } = await supabase.auth.getUser();
+    if (!user) {
+      showError("You must be logged in to create a chatbot.");
+      setIsDeploying(false);
+      return;
+    }
+
+    const { error } = await supabase
+      .from('chatbots')
+      .insert({
+        name,
+        description,
+        hosting,
+        user_id: user.id,
+      });
+
+    if (error) {
+      showError(error.message);
+    } else {
+      showSuccess("Chatbot created successfully!");
+      navigate("/dashboard");
+    }
+    setIsDeploying(false);
+  };
 
   return (
     <div className="flex flex-1 items-center justify-center">
@@ -44,7 +77,9 @@ const CreateChatbot = () => {
           {step < steps.length ? (
             <Button onClick={nextStep}>Next</Button>
           ) : (
-            <Button>Deploy</Button>
+            <Button onClick={handleDeploy} disabled={isDeploying}>
+              {isDeploying ? "Deploying..." : "Deploy"}
+            </Button>
           )}
         </CardFooter>
       </Card>

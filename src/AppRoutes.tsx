@@ -8,7 +8,7 @@ import { PoolLayout } from "./components/PoolLayout";
 import CreateChatbot from "./pages/CreateChatbot";
 import ChatbotDetail from "./pages/ChatbotDetail";
 import { Skeleton } from "./components/ui/skeleton";
-import PoolsDashboard from "./pages/PoolsDashboard";
+import Pools from "./pages/Pools";
 import CreatePool from "./pages/CreatePool";
 import Billing from "./pages/Billing";
 import Settings from "./pages/Settings";
@@ -42,8 +42,8 @@ const AppRoutes = () => {
   return (
     <Routes>
       <Route element={<Layout />}>
-        <Route path="/" element={<Navigate to="/dashboard" replace />} />
-        <Route path="/dashboard" element={<PoolsDashboard />} />
+        <Route path="/" element={<Navigate to="/pools" replace />} />
+        <Route path="/pools" element={<Pools />} />
         <Route path="/create-pool" element={<CreatePool />} />
         <Route path="/billing" element={<Billing />} />
         <Route path="/settings" element={<Settings />} />
@@ -55,7 +55,7 @@ const AppRoutes = () => {
         <Route path="/pool/:poolId/chatbot/:id" element={<ChatbotDetail />} />
       </Route>
       
-      <Route path="/login" element={<Navigate to="/dashboard" replace />} />
+      <Route path="/login" element={<Navigate to="/pools" replace />} />
       <Route path="*" element={<NotFound />} />
     </Routes>
   );

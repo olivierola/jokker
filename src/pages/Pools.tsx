@@ -8,7 +8,7 @@ import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import { PlusCircle } from "lucide-react";
 
-const PoolsDashboard = () => {
+const Pools = () => {
   const [pools, setPools] = React.useState<Pool[]>([]);
   const [isLoading, setIsLoading] = React.useState(true);
 
@@ -63,4 +63,4 @@ const PoolsDashboard = () => {
   );
 };
 
-export default PoolsDashboard;
+export default Pools;

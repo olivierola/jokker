@@ -2,7 +2,7 @@ import { FolderKanban, Settings, CreditCard } from "lucide-react";
 
 export const mainNavItems = [
   {
-    href: "/dashboard",
+    href: "/pools",
     label: "Pools",
     icon: FolderKanban,
   },

@@ -23,7 +23,7 @@ const CreatePool = () => {
     try {
       await createPool({ name, description });
       showSuccess("Pool created successfully!");
-      navigate("/dashboard");
+      navigate("/pools");
     } catch (error) {
       showError((error as Error).message);
     } finally {

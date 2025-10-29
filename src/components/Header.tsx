@@ -46,7 +46,7 @@ export const Header = () => {
         <SheetContent side="left" className="flex flex-col">
           <nav className="grid gap-2 text-lg font-medium">
             <Link
-              to="/dashboard"
+              to="/pools"
               className="mb-4 flex items-center gap-2 text-lg font-semibold"
             >
               <Bot className="h-6 w-6" />
@@ -68,7 +68,7 @@ export const Header = () => {
       
       <div className="hidden md:flex items-center gap-6 text-sm font-medium">
         {!isPoolView && (
-            <Link to="/dashboard" className="flex items-center gap-2 font-semibold">
+            <Link to="/pools" className="flex items-center gap-2 font-semibold">
                 <Bot className="h-6 w-6" />
                 <span>AI Forge</span>
             </Link>
